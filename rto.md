@@ -1,7 +1,7 @@
-# real-robots
+# Robotino (RTO)
 
 
-Robotino
+[Source](https://github.com/dietriro/rto_core)
 
 ## Installation
 
