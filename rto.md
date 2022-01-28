@@ -1,11 +1,16 @@
 # Robotino (RTO)
+## Setup Robotino Hardware from scratch
+
 
 
 [Source](https://github.com/dietriro/rto_core)
 
-## Installation
+## Install Ubuntu 20.04 and ROS
 
-In order to use the robot you first have to install Ubuntu Focal (20.04) as well as ROS Noetic, which currently is the only supported ROS version of this repository. After installing Ubuntu on a computer please follow the instructions below for installing ROS and all other necessary software.
+
+In order to use the robot you first have to install Ubuntu Focal (20.04) using a bootable USB Stick. 
+
+Then, install ROS Noetic.
 
 ```bash
 #!/bin/bash
@@ -72,13 +77,26 @@ export ROBOT=rto-1              # Change to whatever robot you would like to use
 export ROBOT_ENV=sim-simple     # Change to whatever world you would like to use
 ```
 
-## Usage
-First, convert xacro to urdf model
+## Install hardware drivers for RTO on noetic
+Next, you need to install the hardware drivers required to operate the real rto robot. [Source](https://wiki.openrobotino.org/index.php?title=Robotino_OS)
 ```
-rosrun xacro xacro model.xacro > model.urdf
+wget -qO - http://packages.openrobotino.org/keyFile | sudo apt-key add -
+sudo su
+echo "deb http://packages2.openrobotino.org focal main" > /etc/apt/sources.list.d/openrobotino.list
+exit
+sudo apt --fix-broken install
+```
+Then go to this page and download all packages 
+https://wiki.openrobotino.org/index.php?title=Robotino_OS
+
+go to your download folder and install them:
+```
+sudo dpkg -i *.deb
 ```
 
-If you want to use a real-world RTO, then you have to first download and install everything as explained in the previous section. Afterwards you can start-up the **communication** with the daemons running on the robot by using the following command:
+
+## Usage
+If you have downloaded everything according to the previous steps, you can start-up the **communication** with the daemons running on the robot by using the following command:
 
     roslaunch rto_bringup robot.launch
 
@@ -106,3 +124,16 @@ Regardless of the localization/navigation launched, you can always run an **rviz
     roslaunch rto_bringup rviz.launch
 
 This configuration includes visualizations for the most important topics.
+
+## Troubleshouting
+If you encounter problems with the urdf or xacro files not being found, convert the xacro files to urdf models.
+```
+rosrun xacro xacro model.xacro > model.urdf
+```
+Or change line 11 of catkin_ws/src/rto_core/rto_bringup/launch/components/base.xml 
+```
+from <param name="robot_description" textfile="$(find rto_description)/urdf/robots/$(arg robot).urdf" />
+to
+<param name="robot_description" textfile="$(find rto_description)/urdf/robots/$(arg robot).urdf.xacro" />
+```
+
