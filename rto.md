@@ -93,6 +93,20 @@ go to your download folder and install them:
 ```
 sudo dpkg -i *.deb
 ```
+## Laser Scan Setup
+We utilize the SICK Laserscanner, which is a 265° 3D lidar scanner. Using the cloud to scan package, we convert it to a 2D planar scan. 
+Connect the Scanner to the robotino power source as depicted in this image:
+Currently, the IP adress is set to 
+```
+192.168.1.20
+```
+It can be changed using the SOPAS app on a seperate Windows machine (as its only running on Windows), or using this launch file:
+
+```
+roslaunch sick_scan sick_new_ip.launch hostname:=192.168.1.20 new_IP:=192.168.1.xxx
+```
+If connecting to a new robotino, you have to set a static IP for the Ethernet Adapter. Therefore, go to the Ethernet settings and assign a static IP with the same namespace, that was given using the SOPAS app (for our Scanner, it is 192.168.1.xxx). Afterwards, the laserscanner should be recognized by the robotino. To check, use the Python script sick_scan/tools/sick_generic_device_finder/sick_generic_device_finder.py, which sends a UDP broadcast to which all available scanners respond with a device description. The varibale UDP_IP = "192.168.0.255" defines the broardcast adress used by the script. If you are using a different IP address configuration on your host pc you have to change this variable according to the brodcast address of your network card.
+ifconfig shows the broadcast adress for every network adapter.
 
 
 ## Usage
