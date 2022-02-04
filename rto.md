@@ -1,5 +1,5 @@
 # Robotino (RTO)
-This guide was specificially written for the Robotino2 in the Telekom Innovation Lab. Hence, all IPs, configurations, etc. are matched to work with this specific robot and its equipment. Everything needed to run the robot and publishing laser scan data is already installed. Thus, to use the robot, skip to the Usage part. However, you can use this guide to set up new Robotinos with Sick Laser Scanners from scratch.
+This guide was specificially written for the Robotino2 in the Telekom Innovation Lab. Hence, all IPs, configurations, etc. are matched to work with this specific robot and its equipment. Everything needed to run the robot and publishing laser scan data is already installed. Thus, to use the robot, skip the Installation and go to the Usage part. However, you can use this guide to set up new Robotinos with Sick Laser Scanners from scratch.
 
 ## Setup Robotino Hardware from scratch
 [Source](https://github.com/dietriro/rto_core)
@@ -111,12 +111,15 @@ ifconfig shows the broadcast adress for every network adapter.
 # Usage
 If you have downloaded everything according to the previous steps, you can start the robot by using the following command:
 
+    cd /home/robotino/code/real_ws/
+    source devel/setup.zsh
     roslaunch rto_bringup robot.launch
 
 In order to run this successfully, you first need to specify the robot you'd like to use (e.g. rto-1) as well as the world you would like the robot to use (e.g. sample) as environment variables, if you haven't added them to your `.bashrc` yet.
 
     export ROBOT=rto-1
     export ROBOT_ENV=sample
+    
 (This is already set in the zshrc)
 
 The `robot.launch` file then starts up all necessary nodes for communicating with the robot daemons (for driving commands and odometry information, sick-scanner), for retrieving sensor information as well as moving the robot around using a joystick (in case it is connected). 
