@@ -16,3 +16,5 @@ Start the robot and its hokuyo laser scan, which is a 260° planar laser scanner
 Launch teleoperation node
 
     rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+
+Attention: the youbot is fast (up to 0.8m/s)! Please check thee velocity before you start pressing any keys! 
