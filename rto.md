@@ -129,7 +129,17 @@ rosrun gmapping slam_gmapping scan:=scan_new
 ```
 In case you encounter problems due to gmapping not registering any scans, you can change the laser scan topic in the pointcloud2scan file (/home/robotino/code/real_ws/src/pointcloud_to_laserscan/src/pointcloud_to_laserscan_node.cpp) and name it instead /scan, which is the default topic, which gmapping listens to.
 
-You will need the same environment variables (ROBOT, ROBOT_ENV) for this launch file as you did for the previous one. This file then launches a slam algorithm from the [slam-toolbox](https://github.com/SteveMacenski/slam_toolbox). You can of course also use any other slam framework but the one from Steve Macenski is quite comprehensive and covers even long-term features as well as a continuation feature where you start from a previously built map.
+###Start teleoperation
+Start teleoperation and drive around.
+```
+roslaunch rto_teleop keyboard_teleop.launch  
+```
+RTO teleoperation is limited to 0.1m/s, you may better use another teleoperation package with a higher speed or modify the package.
+
+Save map with map server
+```
+rosrun map_server map_saver [--occ <threshold_occupied>] [--free <threshold_free>] [-f <mapname>] map:=/your/costmap/topic
+```
 
 ### Navigation with a map
 If you already have a map and want the robot to **localize and navigate** in it then you need to run the following:
