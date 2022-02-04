@@ -109,8 +109,8 @@ If connecting to a new robotino, you have to set a static IP for the Ethernet Ad
 ifconfig shows the broadcast adress for every network adapter.
 
 
-## Usage
-If you have downloaded everything according to the previous steps, you can start-up the **communication** with the daemons running on the robot by using the following command:
+# Usage
+If you have downloaded everything according to the previous steps, you can start the robot by using the following command:
 
     roslaunch rto_bringup robot.launch
 
@@ -118,15 +118,21 @@ In order to run this successfully, you first need to specify the robot you'd lik
 
     export ROBOT=rto-1
     export ROBOT_ENV=sample
+(This is already set in the zshrc)
 
-The `robot.launch` file then starts up all necessary nodes for communicating with the robot daemons (for driving commands and odometry information), for retrieving sensor information as well as moving the robot around using a joystick (in case it is connected). 
+The `robot.launch` file then starts up all necessary nodes for communicating with the robot daemons (for driving commands and odometry information, sick-scanner), for retrieving sensor information as well as moving the robot around using a joystick (in case it is connected). 
 
-This launch file, however, does not start-up any localization or navigation algorithm. If you would like to map the environment from scratch without a previous map using **SLAM** you can run the following command after starting up the robot as described in the previous part:
+### Mapping
 
-    roslaunch rto_navigation slam.launch
+To record a map, start the gmapping node and provide it with the laser scan data (in our case /scan_new):
+```
+rosrun gmapping slam_gmapping scan:=scan_new   
+```
+In case you encounter problems due to gmapping not registering any scans, you can change the laser scan topic in the pointcloud2scan file (/home/robotino/code/real_ws/src/pointcloud_to_laserscan/src/pointcloud_to_laserscan_node.cpp) and name it instead /scan, which is the default topic, which gmapping listens to.
 
 You will need the same environment variables (ROBOT, ROBOT_ENV) for this launch file as you did for the previous one. This file then launches a slam algorithm from the [slam-toolbox](https://github.com/SteveMacenski/slam_toolbox). You can of course also use any other slam framework but the one from Steve Macenski is quite comprehensive and covers even long-term features as well as a continuation feature where you start from a previously built map.
 
+### Navigation with a map
 If you already have a map and want the robot to **localize and navigate** in it then you need to run the following:
 
     roslaunch rto_navigation navigation.launch
