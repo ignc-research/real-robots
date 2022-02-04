@@ -1,8 +1,7 @@
 # Robotino (RTO)
+This guide was specificially written for the Robotino2 in the Telekom Innovation Lab. Hence, all IPs, configurations, etc. are matched to work with this specific robot and its equipment. Everything needed to run the robot and publishing laser scan data is already installed. Thus, to use the robot, skip to the Usage part. However, you can use this guide to set up new Robotinos with Sick Laser Scanners from scratch.
+
 ## Setup Robotino Hardware from scratch
-
-
-
 [Source](https://github.com/dietriro/rto_core)
 
 ## Install Ubuntu 20.04 and ROS
