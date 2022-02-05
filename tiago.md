@@ -23,4 +23,12 @@ pw:pal
 ```
 
 Now you can control the robot via the second remote PC. All drivers are up and topics published. 
-You can also set the ROS_MASTER_URI to avoid using ssh. 
+To use visualization e.g. RVIZ, you need to set the ROS_MASTER_URI to avoid using ssh. This is then only possible on the first remote PC. 
+
+## Teleoperation
+The robots default velocity topic is /key_vel instead of the commonly used /cmd_vel. To teleoperate the robot,
+go into ~/real_ws/src/teleop_twist_keyboard and start the python script:
+
+    python teleop_twist_keyboard.py
+    
+Attention: the robot is very fast! Check the velocity and decrease it if there are still monitors or other devices connected. If you want to operate at higher speeds, unplug all devices first!
