@@ -1,12 +1,13 @@
 # Real Robots
 This repo contains the commands to setup and run the robots in the IGNC lab. Please refer to the respective robot documentationss
 Currently, we operate the following real robots: 
-- Tia Go, 
-- Robotino Festo, 
-- Turtlebot3 Burger 
-- Turtlebot Waffle, 
-- Care o Bot4, 
-- Kuka Youbot
+- Tia Go (Differential Drive), 
+- Robotino Festo (Holonomic), 
+- Turtlebot3 Burger (Diff Drive)
+- Turtlebot Waffle (Diff Drive), 
+- Care o Bot4 (Holonomic), 
+- Kuka Youbot (Holonomic),
+- Erle Rover (Car-like, Ackermann Drive)
 
 # IP Addresses T-Labs
 ### Robots
@@ -15,6 +16,7 @@ Currently, we operate the following real robots:
 - Turtlebot3 Burger 
 - Care o Bot4
 - Kuka Youbot: 192.168.117.23
+- Erle Rover: 192.168.117.67
 
 
 ### PCs
