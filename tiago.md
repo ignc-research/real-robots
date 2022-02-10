@@ -1,6 +1,14 @@
 # Working with the TiaGo PAL robot
 To start the robot, press the button for about 2 seconds and release. 
 
+# Damages Resolved! Documentation under construction
+
+odom topic: /mobile_base_controller/odom
+cmd_vel topic: /twist_mux/cmd_vel
+scan topic: /scan or /scan_raw
+
+
+## Old doc
 Due to some damage in the board computer, the robot isnt working out of the box. Normaly, it would start its own network for other devices to connect to. 
 Hence, we are following another solution:
 
